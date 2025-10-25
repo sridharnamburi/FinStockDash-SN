@@ -2,7 +2,8 @@ requests
 pandas
 numpy
 millify
-plotly
+plotly>=5.14.0
 streamlit==1.40.1
 XlsxWriter
 yfinance
+
