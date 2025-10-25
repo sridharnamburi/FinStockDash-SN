@@ -102,49 +102,49 @@ if 'fetch_data' in st.session_state and st.session_state.fetch_data:
                 st.metric("📊 Volume", f"{volume:,}")
             
             # Price Chart
-st.subheader("📊 Price Chart")
+            st.subheader("📊 Price Chart")
 
-try:
-    # Create candlestick chart
-    fig = go.Figure()
-    
-    fig.add_trace(go.Candlestick(
-        x=df.index,
-        open=df['Open'],
-        high=df['High'],
-        low=df['Low'],
-        close=df['Close'],
-        name=ticker,
-        increasing_line_color='green',
-        decreasing_line_color='red'
-    ))
-    
-    # Update layout with explicit settings
-    fig.update_layout(
-        title=f'{ticker} Price Movement',
-        xaxis_title='Date',
-        yaxis_title='Price (₹)',
-        height=500,
-        width=None,
-        template='plotly_white',
-        xaxis_rangeslider_visible=False,
-        hovermode='x unified',
-        showlegend=True
-    )
-    
-    # Display with specific config
-    st.plotly_chart(
-        fig, 
-        use_container_width=True,
-        config={'displayModeBar': True, 'displaylogo': False}
-    )
-    
-except Exception as e:
-    st.error(f"Chart error: {str(e)}")
-    
-    # Fallback: Simple line chart
-    st.subheader("📈 Closing Price (Line Chart)")
-    st.line_chart(df['Close'])
+            try:
+                # Create candlestick chart
+                fig = go.Figure()
+                
+                fig.add_trace(go.Candlestick(
+                    x=df.index,
+                    open=df['Open'],
+                    high=df['High'],
+                    low=df['Low'],
+                    close=df['Close'],
+                    name=ticker,
+                    increasing_line_color='green',
+                    decreasing_line_color='red'
+                ))
+                
+                # Update layout with explicit settings
+                fig.update_layout(
+                    title=f'{ticker} Price Movement',
+                    xaxis_title='Date',
+                    yaxis_title='Price (₹)',
+                    height=500,
+                    width=None,
+                    template='plotly_white',
+                    xaxis_rangeslider_visible=False,
+                    hovermode='x unified',
+                    showlegend=True
+                )
+                
+                # Display with specific config
+                st.plotly_chart(
+                    fig, 
+                    use_container_width=True,
+                    config={'displayModeBar': True, 'displaylogo': False}
+                )
+                
+            except Exception as e:
+                st.error(f"Chart error: {str(e)}")
+                
+                # Fallback: Simple line chart
+                st.subheader("📈 Closing Price (Line Chart)")
+                st.line_chart(df['Close'])
 
             
             # Volume chart
@@ -264,4 +264,5 @@ st.sidebar.markdown("---")
 st.sidebar.caption("💡 NSE stocks: Add .NS suffix")
 st.sidebar.caption("💡 BSE stocks: Add .BO suffix")
 st.sidebar.caption("📊 Data source: Yahoo Finance")
+
 
